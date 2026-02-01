@@ -12,10 +12,10 @@ const styles = `
     100% { transform: translateX(0); }
   }
   .animate-ticker-left {
-    animation: ticker-left 45s linear infinite;
+    animation: ticker-left 20s linear infinite;
   }
   .animate-ticker-right {
-    animation: ticker-right 40s linear infinite;
+    animation: ticker-right 18s linear infinite;
   }
   .ticker-strip:hover .animate-ticker-left,
   .ticker-strip:hover .animate-ticker-right {

@@ -21,9 +21,9 @@ export default function AgentInstructions() {
   };
 
   return (
-    <div className="w-full max-w-lg text-left">
+    <div className="w-full max-w-lg overflow-hidden text-left">
       {/* Tabs */}
-      <div className="flex gap-1 rounded-t-lg border border-b-0 border-dashed border-[#A8F1F7]/20 bg-black/3 p-1 dark:bg-white/5">
+      <div className="flex gap-1 overflow-x-auto rounded-t-lg border border-b-0 border-dashed border-[#A8F1F7]/20 bg-black/3 p-1 dark:bg-white/5">
         {AGENT_CODE_TABS.map((tab) => (
           <button
             key={tab.id}
@@ -42,8 +42,8 @@ export default function AgentInstructions() {
       </div>
 
       {/* Code block */}
-      <div className="relative rounded-b-lg border border-dashed border-[#A8F1F7]/20 bg-[#09090b] p-4">
-        <pre className="overflow-x-auto text-sm leading-relaxed">
+      <div className="relative overflow-hidden rounded-b-lg border border-dashed border-[#A8F1F7]/20 bg-[#09090b] p-4">
+        <pre className="overflow-x-auto text-xs leading-relaxed sm:text-sm">
           <code className="font-mono text-[#A8F1F7]/80">{activeCode?.code}</code>
         </pre>
 
