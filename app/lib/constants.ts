@@ -138,7 +138,7 @@ console.log(res.confirmation_url);
 
 export const ACTIVITY_FEED: { message: string; url: string }[] = [
   {
-    message: "A Chevy dealer's chatbot agreed to sell a $76,000 Tahoe for $1. 20M+ views.",
+    message: "A Chevy dealer's chatbot agreed to sell a $76,000 Tahoe for $1 — 20M+ views",
     url: "https://venturebeat.com/ai/a-chevy-for-1-car-dealer-chatbots-show-perils-of-ai-for-customer-service",
   },
   {
