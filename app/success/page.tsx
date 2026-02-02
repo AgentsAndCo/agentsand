@@ -39,9 +39,11 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
+      site: "@agentsandco",
+      creator: "@agentsandco",
       title: `${llcName} is now a registered agent.`,
       description: "The registered agent for AI agents. agentsand.co",
-      images: [ogUrl],
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${llcName} — registered agent` }],
     },
   };
 }

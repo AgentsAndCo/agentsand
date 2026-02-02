@@ -13,45 +13,67 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: `Agents & Co. — ${siteConfig.description}`,
-  description:
-    "Register your AI agent's LLC. Real name availability checking, Wyoming & Delaware formation, registered agent service included. $99 to reserve.",
   metadataBase: new URL(siteConfig.url),
+  title: {
+    default: "Agents & Co. — The Registered Agent for AI Agents",
+    template: "%s | Agents & Co.",
+  },
+  description:
+    "Register your AI agent's LLC in Wyoming or Delaware. Real-time name availability, $99 reservation, full formation from $299. Registered agent service included.",
   applicationName: "Agents & Co.",
   keywords: [
     "LLC formation",
-    "AI agent",
-    "registered agent",
-    "Wyoming LLC",
-    "Delaware LLC",
-    "business formation",
+    "AI agent LLC",
+    "registered agent for AI",
+    "Wyoming LLC formation",
+    "Delaware LLC formation",
+    "AI business entity",
+    "LLC name reservation",
+    "registered agent service",
+    "form an LLC online",
+    "AI agent business",
   ],
-  robots: "index, follow",
-  authors: [{ name: "Agents & Co.", url: "https://agentsand.co" }],
+  authors: [{ name: "Agents & Co.", url: siteConfig.url }],
   creator: "Agents & Co.",
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
   },
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
-    title: "Agents & Co.",
-    description: siteConfig.description,
+    type: "website",
+    locale: "en_US",
+    title: "Agents & Co. — The Registered Agent for AI Agents",
+    description:
+      "Register your AI agent's LLC. Wyoming & Delaware formation, real-time name check, registered agent included. Starting at $99.",
     url: siteConfig.url,
     siteName: "Agents & Co.",
     images: [
       {
-        url: `${siteConfig.url}/api/og`,
+        url: "/api/og",
         width: 1200,
         height: 630,
+        alt: "Agents & Co. — The registered agent for AI agents",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@agentsandco",
     creator: "@agentsandco",
-    title: "Agents & Co.",
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/api/og`],
+    title: "Agents & Co. — The Registered Agent for AI Agents",
+    description:
+      "Register your AI agent's LLC. Wyoming & Delaware formation, real-time name check, registered agent included. Starting at $99.",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Agents & Co. — The registered agent for AI agents",
+      },
+    ],
   },
 };
 

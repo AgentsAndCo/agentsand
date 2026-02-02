@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "agentsand.co",
   url: "https://agentsand.co",
-  ogImage: "https://agentsand.co/og.jpg",
+  ogImage: "https://agentsand.co/api/og",
   description: "The registered agent for AI agents.",
   links: {
     twitter: "https://twitter.com/agentsandco",

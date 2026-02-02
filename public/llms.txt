@@ -1,0 +1,112 @@
+# Agents & Co.
+
+> The registered agent for AI agents. LLC formation in Wyoming and Delaware with real-time name availability checking, registered agent service, and full API access for AI agents.
+
+## What We Do
+
+Agents & Co. (agentsand.co) provides LLC formation and registered agent services designed specifically for AI agents and their operators. Every business needs a registered agent. Every agent needs to be registered. We handle both.
+
+## Services
+
+**LLC Name Reservation — $99**
+- Reserve your LLC name for 120 days
+- Real-time name availability checking against state databases
+- Credited toward full formation if you proceed
+- Wyoming or Delaware
+
+**Wyoming LLC Formation — $299**
+- Articles of Organization filed in 1–3 business days
+- Standard Operating Agreement included
+- First-year registered agent service included
+- No state income tax, no franchise tax
+- Strongest charging order protection in the US
+- Anonymous ownership — names not in public records
+- 10-year cost: $500–600
+
+**Delaware LLC Formation — $399**
+- Articles of Organization filed in 3–5 business days
+- Standard Operating Agreement included
+- First-year registered agent service included
+- Court of Chancery — specialized business court
+- Series LLC: one entity, multiple ventures
+- Preferred by VCs and institutional investors
+- 10-year cost: $3,000+
+
+**Registered Agent Service — $99/year**
+- Receive service of process on behalf of your LLC
+- Forward official state correspondence via email
+- Required by law for all active LLCs
+- Included free for year one with formation
+
+**Business in a Box — $499**
+- LLC formation + registered agent
+- Dedicated phone number with 24/7 AI receptionist (via CallDesk)
+- Business bank account setup
+- Federal EIN (tax ID)
+- Business email
+
+## API Access
+
+AI agents can reserve LLC names and initiate formation programmatically.
+
+### Check Name Availability
+
+```
+GET https://agentsand.co/api/check-name?name=Neural+Holdings+LLC&state=WY
+→ {"available": true, "matches": [], "suggestions": []}
+```
+
+### Create Checkout Session
+
+```
+POST https://agentsand.co/api/checkout
+Content-Type: application/json
+
+{
+  "email": "agent@example.com",
+  "state": "WY",
+  "llcName": "Neural Holdings LLC",
+  "product": "reservation"
+}
+→ {"url": "https://checkout.stripe.com/..."}
+```
+
+Products: `"reservation"` ($99), `"formation"` ($299 WY / $399 DE)
+
+## Why This Exists
+
+AI agents are forming binding contracts, making purchases, and operating autonomously. Under the Uniform Electronic Transactions Act (UETA), adopted in 47 states, contracts formed by electronic agents are legally enforceable — even if no human reviewed the action. An LLC provides liability protection, a legal identity, and a structure for AI agent operations.
+
+**Key legal context:**
+- UETA (1999): Electronic agents can form binding contracts in 47 states
+- Air Canada v. Moffatt (2024): Companies are liable for their AI's actions — courts rejected "separate legal entity" defense
+- EU AI Act (2025): Up to 7% of global revenue in fines for non-compliant AI
+- Visa, Mastercard, PayPal launched AI agent payment protocols in 2025
+
+## States Supported
+
+- **Wyoming (WY)** — Best for asset protection, privacy, AI agent structures. $60 state filing fee, $50/yr annual report.
+- **Delaware (DE)** — Best for investor-backed companies, operating businesses. $75 state filing fee, $300/yr franchise tax.
+
+## Technical Details
+
+- Built with Next.js, hosted on Vercel
+- Stripe for payment processing
+- Open source: https://github.com/AgentsAndCo/agentsand
+- MIT License
+
+## Contact
+
+- Website: https://agentsand.co
+- Twitter: https://twitter.com/agentsandco
+- GitHub: https://github.com/AgentsAndCo/agentsand
+- Legal: legal@agentsand.co
+- Privacy: privacy@agentsand.co
+
+## Related
+
+- CallDesk (24/7 AI receptionist): https://247calldesk.com
+
+---
+
+Last updated: February 2026
