@@ -198,23 +198,19 @@ export const ACTIVITY_FEED: { message: string; url: string }[] = [
     url: "https://www.conference-board.org/press/AI-risks-disclosure-2025",
   },
   {
-    message:
-      "OpenClaw hit 100K GitHub stars. Researchers found hundreds of exposed instances leaking API keys and chat histories.",
+    message: "OpenClaw hit 100K stars — hundreds of exposed instances leaking API keys.",
     url: "https://www.wired.com/story/open-claw-ai-agent-security-risks/",
   },
   {
-    message:
-      "During OpenClaw's rebrand, crypto scammers seized abandoned GitHub and X handles in 10 seconds. Millions lost to a fake token.",
+    message: "OpenClaw's rebrand let scammers seize its GitHub and X handles — millions lost to a fake token.",
     url: "https://techcrunch.com/2026/01/28/openclaw-rebrand-crypto-scam/",
   },
   {
-    message:
-      'Snyk on OpenClaw: "Your AI assistant has shell access and is one prompt injection away from disaster."',
+    message: "Snyk on OpenClaw: \"One prompt injection away from disaster.\"",
     url: "https://snyk.io/blog/openclaw-security-analysis/",
   },
   {
-    message:
-      "180,000 developers gave their AI agent shell access, email access, and a browser. Most skipped the liability question.",
+    message: "180K developers gave AI agents shell, email, and browser access. Most skipped liability.",
     url: "https://venturebeat.com/ai/openclaw-autonomous-agent-liability-gap/",
   },
 ];
