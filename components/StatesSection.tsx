@@ -10,7 +10,7 @@ function selectProduct(state: "WY" | "DE") {
   document.getElementById("reserve")?.scrollIntoView({ behavior: "smooth" });
 }
 
-export default function HowItWorksSection() {
+export default function StatesSection() {
   return (
     <section id="states" className="w-full overflow-hidden py-16 md:py-24 lg:py-32">
       <div className="container mx-auto px-4 md:px-6">
@@ -19,7 +19,7 @@ export default function HowItWorksSection() {
           <h2 className="text-4xl font-bold tracking-tighter text-neutral-900 md:text-5xl lg:text-6xl dark:text-neutral-50">
             Wyoming invented{" "}
             <span className="block sm:inline">the LLC.</span>
-            <span className="block text-[#0e7490] dark:text-[#A8F1F7]">Now it lets AI run one.</span>
+            <span className="text-[#0e7490] dark:text-[#A8F1F7]"> Now it lets AI run one.</span>
           </h2>
           <p className="mx-auto max-w-[640px] text-lg text-neutral-400 md:text-xl">
             The state that created the modern liability shield in 1977 now allows algorithmically managed

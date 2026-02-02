@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "Old School Grotesk";
+  src: url("/fonts/oldschool-grotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
 @theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -42,6 +48,8 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  --font-grotesk: "Old School Grotesk", sans-serif;
 }
 
 /*

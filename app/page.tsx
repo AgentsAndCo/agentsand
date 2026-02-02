@@ -1,9 +1,10 @@
+import { Suspense } from "react";
 import { getReservationCount } from "@/app/lib/db";
 import HeroSection from "@/components/HeroSection";
 import SocialProofMarquee from "@/components/SocialProofMarquee";
 import ProblemSection from "@/components/ProblemSection";
 import Feature from "@/components/Feature";
-import HowItWorksSection from "@/components/HowItWorksSection";
+import StatesSection from "@/components/StatesSection";
 import PricingSection from "@/components/PricingSection";
 import FAQSection from "@/components/FAQSection";
 import UseCasesSection from "@/components/UseCasesSection";
@@ -41,11 +42,13 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Preloader />
-      <HeroSection />
+      <Suspense>
+        <HeroSection />
+      </Suspense>
       <SocialProofMarquee />
       <ProblemSection />
       <Feature />
-      <HowItWorksSection />
+      <StatesSection />
       <PricingSection />
       <FAQSection />
       <UseCasesSection reservationCount={reservationCount} />

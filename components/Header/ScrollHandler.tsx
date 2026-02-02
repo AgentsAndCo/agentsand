@@ -9,7 +9,8 @@ export function ScrollHandler({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      // Stay transparent through the hero + manifesto section (600vh scroll container)
+      setIsScrolled(window.scrollY > window.innerHeight * 5);
     };
 
     window.addEventListener("scroll", handleScroll);

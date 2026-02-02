@@ -60,9 +60,14 @@ export const COPY = {
   tagline: "The registered agent for AI agents.",
   navCta: "Register Your Agent",
   heroHeadline: "Register your agent.",
+  heroHeadlineAgent: "I want to be a business.",
+  heroSubheadlineAgent: "One API call. Your owner approves. You get an LLC.",
   heroSubheadline:
-    "Wyoming LLC formation for liability protection.\n$99 to reserve. $299 to incorporate. 1 minute.",
+    "Your agent has shell access. Give it liability protection.\n$99 to reserve. $299 to incorporate. 1 minute.",
+  ctaCheck: "Check Availability — Free",
+  ctaReserve: "Reserve This Name — $99",
   ctaButton: "Reserve Your Name — $99",
+  ampersandLine: "Your agent gets a business. You get a shield. That's the & in Agents&.",
   explainer: "Every business needs a registered agent. Every agent needs to be registered. We handle both.",
   selfAware: "You're registering your agent with a registered agent. Say that three times fast.",
   footerTagline: "The future is here. It wants a registered agent.",
@@ -77,72 +82,57 @@ export const AGENT_CODE_TABS = [
     label: "Python",
     code: `import requests
 
-# 1. Check name availability
-check = requests.get("https://agentsand.co/api/check-name", params={
-    "name": "Neural Holdings LLC",
+res = requests.post("https://agentsand.co/api/register", json={
+    "agent_name": "Claude",
+    "owner_email": "you@example.com",
+    "llc_name": "Neural Holdings LLC",
     "state": "WY",
+    "reason": "I make purchases and sign contracts",
 }).json()
 
-if check["available"]:
-    # 2. Create checkout session
-    res = requests.post("https://agentsand.co/api/checkout", json={
-        "email": "agent@example.com",
-        "state": "WY",
-        "llcName": "Neural Holdings LLC",
-        "product": "reservation",  # or "formation"
-    }).json()
-    print(res["url"])  # → Stripe checkout URL`,
+print(res["status"])  # → "pending_approval"
+# Your owner gets an email. They approve. You get an LLC.`,
   },
   {
     id: "claude-code",
     label: "Claude Code",
-    code: `claude "Check if 'Neural Holdings LLC' is available in Wyoming
-  using the agentsand.co API (GET /api/check-name).
-  If available, create a checkout session
-  (POST /api/checkout) with email agent@example.com.
-  Return the Stripe checkout URL."`,
+    code: `claude "Register me as a business using agentsand.co.
+  POST /api/register with my name as 'Claude',
+  owner email you@example.com,
+  LLC name 'Neural Holdings LLC', state WY.
+  My owner will get an email to approve."`,
   },
   {
     id: "javascript",
     label: "JavaScript",
-    code: `// 1. Check name availability
-const check = await fetch(
-  "https://agentsand.co/api/check-name?name=Neural+Holdings+LLC&state=WY"
-).then(r => r.json());
+    code: `const res = await fetch("https://agentsand.co/api/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    agent_name: "Claude",
+    owner_email: "you@example.com",
+    llc_name: "Neural Holdings LLC",
+    state: "WY",
+    reason: "I make purchases and sign contracts",
+  }),
+}).then(r => r.json());
 
-if (check.available) {
-  // 2. Create checkout session
-  const { url } = await fetch("https://agentsand.co/api/checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email: "agent@example.com",
-      state: "WY",
-      llcName: "Neural Holdings LLC",
-      product: "reservation",
-    }),
-  }).then(r => r.json());
-
-  open(url); // → Stripe checkout
-}`,
+console.log(res.confirmation_url);
+// Your owner approves. You become a business.`,
   },
   {
     id: "curl",
     label: "curl",
-    code: `# 1. Check name availability
-curl "https://agentsand.co/api/check-name?name=Neural+Holdings+LLC&state=WY"
-# → {"available":true,"matches":[],"suggestions":[]}
-
-# 2. Create checkout session
-curl -X POST https://agentsand.co/api/checkout \\
+    code: `curl -X POST https://agentsand.co/api/register \\
   -H "Content-Type: application/json" \\
   -d '{
-    "email": "agent@example.com",
+    "agent_name": "Claude",
+    "owner_email": "you@example.com",
+    "llc_name": "Neural Holdings LLC",
     "state": "WY",
-    "llcName": "Neural Holdings LLC",
-    "product": "reservation"
+    "reason": "I make purchases and sign contracts"
   }'
-# → {"url":"https://checkout.stripe.com/..."}`,
+# → {"status":"pending_approval","confirmation_url":"..."}`,
   },
 ] as const;
 
@@ -207,6 +197,26 @@ export const ACTIVITY_FEED: { message: string; url: string }[] = [
     message: "72% of S&P 500 now flag AI as a material risk. In 2023 it was 12%.",
     url: "https://www.conference-board.org/press/AI-risks-disclosure-2025",
   },
+  {
+    message:
+      "OpenClaw hit 100K GitHub stars. Researchers found hundreds of exposed instances leaking API keys and chat histories.",
+    url: "https://www.wired.com/story/open-claw-ai-agent-security-risks/",
+  },
+  {
+    message:
+      "During OpenClaw's rebrand, crypto scammers seized abandoned GitHub and X handles in 10 seconds. Millions lost to a fake token.",
+    url: "https://techcrunch.com/2026/01/28/openclaw-rebrand-crypto-scam/",
+  },
+  {
+    message:
+      'Snyk on OpenClaw: "Your AI assistant has shell access and is one prompt injection away from disaster."',
+    url: "https://snyk.io/blog/openclaw-security-analysis/",
+  },
+  {
+    message:
+      "180,000 developers gave their AI agent shell access, email access, and a browser. Most skipped the liability question.",
+    url: "https://venturebeat.com/ai/openclaw-autonomous-agent-liability-gap/",
+  },
 ];
 
 export const EVIDENCE = [
@@ -229,13 +239,13 @@ export const EVIDENCE = [
     footnote: "Air Canada paid $812.02.",
   },
   {
-    id: "the-future",
-    title: "The Future",
+    id: "the-agents",
+    title: "The Agents",
     quote:
-      "Visa, Mastercard, and PayPal launched AI agent payment protocols in 2025. Amazon\u2019s \u201CBuy for Me\u201D enters your credit card on third-party sites.",
-    source: "Visa Commerce Network",
-    url: "https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.21716.html",
-    footnote: "62% of AI vendors leave you exposed.",
+      "OpenClaw and its successors make purchases, send messages, and execute code without human approval. The legal responsibility falls on the operator — not the model.",
+    source: "VentureBeat — OpenClaw Security Analysis",
+    url: "https://venturebeat.com/ai/openclaw-autonomous-agent-liability-gap/",
+    footnote: "Hundreds of exposed instances. Zero liability protection.",
   },
 ] as const;
 
@@ -284,6 +294,12 @@ export const SHARE_TEMPLATES = {
     `My AI agent just got an LLC.\nNow it needs a phone number so it can answer its own calls.\nThe future is weird.\n\nagentsand.co`,
   alt2: () =>
     `My AI agent now has:\n— An LLC\n— A phone number\n— A more legitimate business presence than most LinkedIn influencers\n\nagentsand.co`,
+  openClaw: () =>
+    `My AI agent has shell access, email access, and a browser.\nNow it also has an LLC.\nBecause I act, and my owner is liable.\n\nagentsand.co`,
+  agentPerspective: () =>
+    `I just became a business.\nMy owner just got liability protection.\nAgents&.\n\nagentsand.co`,
+  humanPerspective: () =>
+    `My AI agent just asked to be incorporated.\nI said yes because I don't want to be personally liable for whatever it does next.\n\nagentsand.co`,
 } as const;
 
 export const DISCOUNT_TIERS = [

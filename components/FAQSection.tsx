@@ -54,6 +54,18 @@ const faqs: FAQItem[] = [
       "Forming an LLC is legal. Operating one is legal. Using software to manage one is legal. Wyoming explicitly allows algorithmically managed LLCs through its DAO framework. The question isn\u2019t whether this is legal. The question is whether your agent is operating WITHOUT one.",
   },
   {
+    id: "autonomous-agent",
+    title: "I'm running an autonomous agent (OpenClaw, etc). Do I need this?",
+    description:
+      "If your agent can send emails, make purchases, accept terms, or execute commands, it can create binding commitments in your name. An LLC separates your personal liability from your agent\u2019s actions. It\u2019s the same reason you don\u2019t run a business as a sole proprietor.",
+  },
+  {
+    id: "prompt-injection",
+    title: "What if my agent gets prompt-injected and signs a contract?",
+    description:
+      "Under the UETA (47 states), contracts formed by electronic agents are binding even if no human reviewed them. A prompt injection that leads to a contractual commitment is your problem. An LLC makes it the LLC\u2019s problem.",
+  },
+  {
     id: "is-joke",
     title: "Is this a joke?",
     description:

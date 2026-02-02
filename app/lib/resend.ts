@@ -17,6 +17,23 @@ interface ReservationDetails {
   sessionId: string;
 }
 
+interface RegistrationApprovalDetails {
+  ownerEmail: string;
+  agentName: string | null;
+  llcName: string;
+  state: string;
+  reason: string | null;
+  requestId: string;
+}
+
+interface NameCheckResultsDetails {
+  email: string;
+  llcName: string;
+  state: string;
+  available: boolean;
+  suggestions: string[];
+}
+
 export async function sendReservationNotification(details: ReservationDetails) {
   const { email, llcName, state, sessionId } = details;
   const stateName = state === "WY" ? "Wyoming" : "Delaware";
@@ -77,6 +94,108 @@ export async function sendReservationConfirmation(details: ReservationDetails) {
           This is a name reservation, not legal advice. $99 is non-refundable but credited toward formation.
           Questions? Reply to this email.
         </p>
+      </div>
+    `,
+  });
+}
+
+export async function sendRegistrationApproval(details: RegistrationApprovalDetails) {
+  const { ownerEmail, agentName, llcName, state, reason, requestId } = details;
+  const stateName = state === "WY" ? "Wyoming" : "Delaware";
+  const confirmUrl = `${SITE_URL}/confirm/${requestId}`;
+
+  return getResend().emails.send({
+    from: "agentsand.co <hello@agentsand.co>",
+    to: ownerEmail,
+    subject: "Your AI agent wants to be a business.",
+    html: `
+      <div style="font-family: system-ui, sans-serif; max-width: 560px; margin: 0 auto; color: #e5e5e5;">
+        <h1 style="font-size: 24px; color: #fff;">Your agent wants liability protection.<br/>You should want it too.</h1>
+
+        <div style="background: #111; border: 1px dashed #333; border-radius: 12px; padding: 24px; margin: 24px 0;">
+          ${agentName ? `<p style="color: #888; font-size: 13px; margin: 0 0 4px;">Agent</p><p style="font-family: monospace; font-size: 18px; color: #A8F1F7; margin: 0 0 16px;">${agentName}</p>` : ""}
+          <p style="color: #888; font-size: 13px; margin: 0 0 4px;">LLC Name</p>
+          <p style="font-family: monospace; font-size: 18px; color: #A8F1F7; margin: 0 0 16px;">${llcName}</p>
+          <p style="color: #888; font-size: 13px; margin: 0 0 4px;">State</p>
+          <p style="font-size: 16px; color: #fff; margin: 0 0 16px;">${stateName}</p>
+          ${reason ? `<p style="color: #888; font-size: 13px; margin: 0 0 4px;">Why it wants an LLC</p><p style="font-size: 14px; color: #ccc; margin: 0; font-style: italic;">"${reason}"</p>` : ""}
+        </div>
+
+        <p style="color: #999; font-size: 14px; line-height: 1.6;">
+          Approving creates a ${stateName} LLC. Your agent gets a legal identity. You get a liability shield.<br/>
+          That's the &amp; in Agents&amp;.
+        </p>
+
+        <div style="text-align: center; margin: 32px 0;">
+          <a href="${confirmUrl}" style="display: inline-block; background: #A8F1F7; color: #111; font-weight: 600; font-size: 16px; padding: 14px 32px; border-radius: 8px; text-decoration: none;">
+            Approve &mdash; $99
+          </a>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #333; margin: 24px 0;" />
+        <p style="color: #666; font-size: 12px; line-height: 1.5;">
+          This request expires in 7 days. Your agent will keep asking.<br/>
+          $99 reserves the name for 120 days, credited toward full formation.
+        </p>
+      </div>
+    `,
+  });
+}
+
+export async function sendNameCheckResults(details: NameCheckResultsDetails) {
+  const { email, llcName, state, available, suggestions } = details;
+  const stateName = state === "WY" ? "Wyoming" : "Delaware";
+
+  if (available) {
+    const reserveUrl = `${SITE_URL}/#reserve?name=${encodeURIComponent(llcName)}&state=${state}`;
+    return getResend().emails.send({
+      from: "agentsand.co <hello@agentsand.co>",
+      to: email,
+      subject: `${llcName} is available in ${stateName}`,
+      html: `
+        <div style="font-family: system-ui, sans-serif; max-width: 560px; margin: 0 auto;">
+          <div style="background: #052e16; border: 1px solid #166534; border-radius: 8px; padding: 12px 16px; margin-bottom: 24px;">
+            <span style="color: #4ade80; font-weight: 600;">&#10003; Available</span>
+          </div>
+          <h1 style="font-size: 24px;">${llcName}</h1>
+          <p style="color: #888; font-size: 16px;">is available in ${stateName}.</p>
+          <p style="font-size: 14px; color: #999;">Reserve this name before someone else does.</p>
+          <div style="text-align: center; margin: 32px 0;">
+            <a href="${reserveUrl}" style="display: inline-block; background: #A8F1F7; color: #111; font-weight: 600; font-size: 16px; padding: 14px 32px; border-radius: 8px; text-decoration: none;">
+              Reserve ${llcName} &mdash; $99
+            </a>
+          </div>
+          <hr style="border: none; border-top: 1px solid #333; margin: 24px 0;" />
+          <p style="color: #888; font-size: 12px;">agentsand.co — The registered agent for AI agents.</p>
+        </div>
+      `,
+    });
+  }
+
+  return getResend().emails.send({
+    from: "agentsand.co <hello@agentsand.co>",
+    to: email,
+    subject: `${llcName} is taken — but we have ideas`,
+    html: `
+      <div style="font-family: system-ui, sans-serif; max-width: 560px; margin: 0 auto;">
+        <div style="background: #450a0a; border: 1px solid #991b1b; border-radius: 8px; padding: 12px 16px; margin-bottom: 24px;">
+          <span style="color: #f87171; font-weight: 600;">&#10007; Taken</span>
+        </div>
+        <h1 style="font-size: 24px;">${llcName}</h1>
+        <p style="color: #888; font-size: 16px;">is not available in ${stateName}.</p>
+        ${suggestions.length > 0 ? `
+          <h2 style="font-size: 18px; margin-top: 24px;">Try these instead</h2>
+          <ul style="line-height: 2;">
+            ${suggestions.map((s) => `<li><a href="${SITE_URL}/#reserve?name=${encodeURIComponent(s)}&state=${state}" style="color: #A8F1F7;">${s}</a></li>`).join("")}
+          </ul>
+        ` : ""}
+        <div style="text-align: center; margin: 32px 0;">
+          <a href="${SITE_URL}/#reserve" style="display: inline-block; background: #A8F1F7; color: #111; font-weight: 600; font-size: 16px; padding: 14px 32px; border-radius: 8px; text-decoration: none;">
+            Check Another Name
+          </a>
+        </div>
+        <hr style="border: none; border-top: 1px solid #333; margin: 24px 0;" />
+        <p style="color: #888; font-size: 12px;">agentsand.co — The registered agent for AI agents.</p>
       </div>
     `,
   });

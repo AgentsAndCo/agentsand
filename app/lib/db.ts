@@ -1,4 +1,5 @@
 import { neon } from "@neondatabase/serverless";
+import { nanoid } from "nanoid";
 
 function getSql() {
   if (!process.env.DATABASE_URL) return null;
@@ -9,6 +10,62 @@ export function sql(...args: Parameters<ReturnType<typeof neon>>) {
   const client = getSql();
   if (!client) throw new Error("DATABASE_URL is not set");
   return client(...args);
+}
+
+export interface RegistrationRequest {
+  id: string;
+  agent_name: string | null;
+  owner_email: string;
+  llc_name: string;
+  state: string;
+  reason: string | null;
+  status: string;
+  created_at: string;
+  expires_at: string;
+}
+
+export async function createRegistrationRequest(data: {
+  agentName?: string;
+  ownerEmail: string;
+  llcName: string;
+  state: string;
+  reason?: string;
+}): Promise<{ id: string }> {
+  const id = nanoid(12);
+  const client = getSql();
+  if (!client) throw new Error("DATABASE_URL is not set");
+  await client`
+    INSERT INTO registration_requests (id, agent_name, owner_email, llc_name, state, reason)
+    VALUES (${id}, ${data.agentName || null}, ${data.ownerEmail}, ${data.llcName}, ${data.state}, ${data.reason || null})
+  `;
+  return { id };
+}
+
+export async function getRegistrationRequest(id: string): Promise<RegistrationRequest | null> {
+  const client = getSql();
+  if (!client) return null;
+  const result = await client`
+    SELECT * FROM registration_requests WHERE id = ${id}
+  `;
+  if (result.length === 0) return null;
+  return result[0] as RegistrationRequest;
+}
+
+export async function updateRegistrationRequestStatus(id: string, status: string): Promise<void> {
+  const client = getSql();
+  if (!client) return;
+  await client`
+    UPDATE registration_requests SET status = ${status} WHERE id = ${id}
+  `;
+}
+
+export async function insertLead(email: string, llcName: string, state: string, available: boolean): Promise<void> {
+  const client = getSql();
+  if (!client) return;
+  await client`
+    INSERT INTO leads (email, llc_name, state, available)
+    VALUES (${email}, ${llcName}, ${state}, ${available})
+  `;
 }
 
 export async function isNameReserved(name: string, state: string): Promise<boolean> {

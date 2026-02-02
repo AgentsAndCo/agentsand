@@ -23,7 +23,7 @@ function getPriceId(product: ProductType, state: "WY" | "DE"): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, state, llcName: rawName, product: rawProduct, ref } = body;
+    const { email, state, llcName: rawName, product: rawProduct, ref, request_id } = body;
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
         email,
         product,
         ...(ref && typeof ref === "string" ? { ref } : {}),
+        ...(request_id && typeof request_id === "string" ? { request_id } : {}),
       },
       success_url: `${SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: SITE_URL,

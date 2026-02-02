@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { sql, assignPosition, processReferral } from "@/app/lib/db";
+import { sql, assignPosition, processReferral, updateRegistrationRequestStatus } from "@/app/lib/db";
 import { sendReservationConfirmation, sendReservationNotification } from "@/app/lib/resend";
 import { getStripe } from "@/app/lib/stripe";
 
@@ -46,6 +46,12 @@ export async function POST(request: NextRequest) {
 
       // Assign queue position after insert
       await assignPosition(details.sessionId).catch(console.error);
+
+      // Mark registration request as approved if this came from agent path
+      const requestId = metadata.request_id;
+      if (requestId) {
+        await updateRegistrationRequestStatus(requestId, "approved").catch(console.error);
+      }
 
       // Credit referrer if this came via a referral link
       const referrerEmail = metadata.ref;

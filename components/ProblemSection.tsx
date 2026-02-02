@@ -15,7 +15,7 @@ export default function ProblemSection() {
             <br />
             you never read.
           </h2>
-          <p className="text-xl text-red-400/80 md:text-2xl">And you&apos;re liable for it.</p>
+          <p className="text-xl text-red-400/80 md:text-2xl">And you&apos;re personally liable for it.</p>
         </div>
 
         {/* Evidence Cards */}
