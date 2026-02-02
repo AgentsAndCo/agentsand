@@ -224,7 +224,7 @@ function HeroContent() {
                     href="https://openclaw.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[#A8F1F7]/20 bg-[#A8F1F7]/5 px-3 py-1 text-xs font-medium text-[#0e7490] transition-colors hover:border-[#A8F1F7]/40 hover:bg-[#A8F1F7]/10 dark:text-[#A8F1F7]">
+                    className="hidden items-center gap-1.5 rounded-full border border-[#A8F1F7]/20 bg-[#A8F1F7]/5 px-3 py-1 text-xs font-medium text-[#0e7490] transition-colors hover:border-[#A8F1F7]/40 hover:bg-[#A8F1F7]/10 sm:inline-flex dark:text-[#A8F1F7]">
                     Your OpenClaw agent has shell access. Does it have an LLC?
                     <ArrowRight className="h-3 w-3" />
                   </a>
