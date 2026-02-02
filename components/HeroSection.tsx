@@ -87,7 +87,7 @@ export default function HeroSection() {
     <section id="reserve" className="relative w-full overflow-hidden py-16 md:py-24 lg:py-32">
       <div className="container relative mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center gap-6 text-center">
-          <div className="flex max-w-4xl flex-col items-center justify-center space-y-4">
+          <div className="flex min-w-0 max-w-4xl flex-col items-center justify-center space-y-4">
             {/* Role Toggle */}
             <RoleToggleSwitch />
 

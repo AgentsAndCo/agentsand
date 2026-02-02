@@ -21,7 +21,7 @@ export default function AgentInstructions() {
   };
 
   return (
-    <div className="w-full max-w-lg overflow-hidden text-left">
+    <div className="w-full max-w-[calc(100vw-2rem)] overflow-hidden text-left sm:max-w-lg">
       {/* Tabs */}
       <div className="flex gap-1 overflow-x-auto rounded-t-lg border border-b-0 border-dashed border-[#A8F1F7]/20 bg-black/3 p-1 dark:bg-white/5">
         {AGENT_CODE_TABS.map((tab) => (
