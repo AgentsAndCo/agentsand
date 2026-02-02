@@ -12,14 +12,18 @@ const styles = `
     100% { transform: translateX(0); }
   }
   .animate-ticker-left {
-    animation: ticker-left 25s linear infinite;
+    animation: ticker-left 15s linear infinite;
   }
   .animate-ticker-right {
-    animation: ticker-right 22s linear infinite;
+    animation: ticker-right 13s linear infinite;
   }
   .ticker-strip:hover .animate-ticker-left,
   .ticker-strip:hover .animate-ticker-right {
     animation-play-state: paused;
+  }
+  .ticker-strip {
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
   }
 `;
 
@@ -55,7 +59,7 @@ export default function SocialProofMarquee() {
       <style>{styles}</style>
       <section className="w-full space-y-1.5 py-6 md:py-8">
         {/* Row 1 — needs exactly 2N copies so -50% loops seamlessly */}
-        <div className="ticker-strip relative overflow-hidden rounded-md bg-zinc-950 dark:bg-white/[0.03]">
+        <div className="ticker-strip relative overflow-x-auto overflow-y-hidden scrollbar-none rounded-md bg-zinc-950 dark:bg-white/[0.03]">
           <div className="flex animate-ticker-left items-center py-2">
             {repeat(row1, 8).map((item, i) => (
               <TickerItem key={`t1-${i}`} item={item} />
@@ -64,7 +68,7 @@ export default function SocialProofMarquee() {
         </div>
 
         {/* Row 2 */}
-        <div className="ticker-strip relative overflow-hidden rounded-md bg-zinc-950 dark:bg-white/[0.03]">
+        <div className="ticker-strip relative overflow-x-auto overflow-y-hidden scrollbar-none rounded-md bg-zinc-950 dark:bg-white/[0.03]">
           <div className="flex animate-ticker-right items-center py-2">
             {repeat(row2, 8).map((item, i) => (
               <TickerItem key={`t2-${i}`} item={item} />

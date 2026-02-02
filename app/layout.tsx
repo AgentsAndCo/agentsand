@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Footer } from "@/components/footer";
@@ -10,6 +11,12 @@ import { Analytics } from "@vercel/analytics/next";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const oldSchoolGrotesk = localFont({
+  src: "../public/fonts/oldschool-grotesk.woff2",
+  variable: "--font-grotesk",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -89,7 +96,7 @@ export default function RootLayout({
   return (
     <html className="scroll-smooth" lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistSans.className} antialiased`}
+        className={`${geistSans.variable} ${oldSchoolGrotesk.variable} ${geistSans.className} antialiased`}
       >
         <ThemeProvider
           attribute="class"

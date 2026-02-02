@@ -4,12 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: "Old School Grotesk";
-  src: url("/fonts/oldschool-grotesk.woff2") format("woff2");
-  font-display: swap;
-}
-
 @theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -49,7 +43,6 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --font-grotesk: "Old School Grotesk", sans-serif;
 }
 
 /*
@@ -61,6 +54,13 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+  @font-face {
+    font-family: "Old School Grotesk";
+    src: url("/fonts/oldschool-grotesk.woff2") format("woff2");
+    font-weight: 800;
+    font-display: swap;
+  }
+
   *,
   ::after,
   ::before,
@@ -73,6 +73,10 @@
 @layer utilities {
   body {
     font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .font-grotesk {
+    font-family: "Old School Grotesk", sans-serif;
   }
 
   /* Custom range slider styling */
