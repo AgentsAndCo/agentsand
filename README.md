@@ -259,7 +259,7 @@ Copy the signing secret into your `STRIPE_WEBHOOK_SECRET` environment variable.
 
 ## Contributing
 
-PRs welcome. Contributors get **6 months free** [CallDesk](https://calldesk.ai) AI receptionist service.
+PRs welcome. Contributors get **6 months free** [CallDesk](https://247calldesk.com) AI receptionist service.
 
 ```bash
 # Fork and clone
